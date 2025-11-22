@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import PlantList from "./PlantList";
-import PlantForm from "./PlantForm";
+import PlantForm from "/PlantForm";
 import PlantCard from "./PlantCard";
 import { Plant } from "./types";
 
