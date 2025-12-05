@@ -1,9 +1,9 @@
 
 import { useState } from "react";
+import { Plant } from "./types";
 import PlantList from "./PlantList";
-import PlantForm from "./PlantForm";
 import PlantCard from "./PlantCard";
-import { Plant} from "./types";
+import PlantForm from "./PlantForm";
 
 type Props = {
   plants: Plant[];
@@ -11,7 +11,8 @@ type Props = {
 
 export default function App({ plants }: Props) {
   const [selectedId, setSelectedId] = useState<number | null>(null);
-  const selectedPlant = plants.find((p) => p.id === selectedId) || plants[0];
+
+  const selectedPlant = plants.find((p) => p.id === selectedId) || null;
 
   return (
     <div className="container mt-4">
@@ -19,16 +20,14 @@ export default function App({ plants }: Props) {
 
       <div className="row">
         <div className="col-md-4">
-          <PlantList
-            plants={plants}
-            selectedId={selectedId}
-            onSelect={setSelectedId}
-          />
+          <PlantList plants={plants} selectedId={selectedId} onSelect={setSelectedId} />
         </div>
 
         <div className="col-md-8">
           <PlantForm />
-          <PlantCard plant={selectedPlant} />
+          <div className="mt-3">
+            <PlantCard plant={selectedPlant} />
+          </div>
         </div>
       </div>
     </div>

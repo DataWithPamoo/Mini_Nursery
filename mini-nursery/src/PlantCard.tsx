@@ -1,37 +1,36 @@
 
-import { Plant } from "./types";
+import {Plant} from "./types";
 
 type Props = {
-  plant: Plant;
+  plant: Plant | null;
 };
 
 export default function PlantCard({ plant }: Props) {
-  if (!plant) return <div>Select a plant</div>;
+  if (!plant) return <div>Select a plant to view details...</div>;
+
+  const lightIcon = plant.light === "Low" ? "🌑" : plant.light === "Medium" ? "🌓" : "🌕";
+  const waterIcon =
+    plant.water === "Low" ? "💧" : plant.water === "Moderate" ? "💦" : "💧💧💧";
 
   return (
-    <div className="card p-3">
+    <div className="card p-3 shadow-sm">
       <h3>
         {plant.name} <br />
-        <small>{plant.scientific}</small>
+        <small className="text-muted">{plant.scientific}</small>
       </h3>
 
       <p>{plant.description}</p>
 
-      <span className="badge bg-primary me-2">{plant.difficulty}</span>
-      <span className="badge bg-warning">{plant.rarity}</span>
+      <div className="mb-2">
+        <span className="badge bg-primary me-2">{plant.difficulty}</span>
+        {plant.rarity && <span className="badge bg-warning text-dark">{plant.rarity}</span>}
+      </div>
 
-      <p className="mt-3">
-        <strong>Light:</strong> {plant.light === "Bright" ? "🌞" : plant.light === "Medium" ? "⛅" : "🌙"}
-        <br />
-        <strong>Water:</strong> {plant.water === "Frequent" ? "💧💧💧" : plant.water === "Moderate" ? "💧💧" : "💧"}
-      </p>
+      <p><strong>Light:</strong> {lightIcon}</p>
+      <p><strong>Water:</strong> {waterIcon}</p>
 
-      <button className="btn btn-secondary me-2" disabled>
-        View
-      </button>
-      <button className="btn btn-success" disabled>
-        Buy
-      </button>
+      <button className="btn btn-secondary me-2" disabled>View</button>
+      <button className="btn btn-success" disabled>Buy</button>
     </div>
   );
 }

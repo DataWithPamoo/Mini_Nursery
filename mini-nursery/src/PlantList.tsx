@@ -13,14 +13,21 @@ export default function PlantList({ plants, selectedId, onSelect }: Props) {
       {plants.map((p) => (
         <li
           key={p.id}
-          className={`list-group-item ${selectedId === p.id ? "active" : ""}`}
+          className={`list-group-item d-flex justify-content-between align-items-center 
+            ${selectedId === p.id ? "active" : ""}`}
           style={{ cursor: "pointer" }}
           onClick={() => onSelect(p.id)}
         >
-          <strong>{p.name}</strong> <br />
-          <small>{p.scientific}</small> <br />
-          <span className="badge bg-primary me-2">{p.difficulty}</span>
-          <span className="badge bg-warning">{p.rarity}</span>
+          <div>
+            <strong>{p.name}</strong>
+            <br />
+            <small>{p.scientific}</small>
+          </div>
+
+          <div>
+            <span className="badge bg-primary me-1">{p.difficulty}</span>
+            {p.rarity && <span className="badge bg-warning text-dark">{p.rarity}</span>}
+          </div>
         </li>
       ))}
     </ul>
